@@ -1,0 +1,15 @@
+{
+  "name": "discordapiwrapper",
+  "version": "1.0.0",
+  "description": "wrapper for accessing discord api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "scuba75",
+  "license": "ISC",
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.9"
+  }
+}
