@@ -1,11 +1,11 @@
 'use strict'
 const fetch = require('node-fetch')
 const path = require('path')
-const ReportError = require('./reportError')
 const headers2get = ['x-ratelimit-bucket', 'x-ratelimit-limit', 'x-ratelimit-remaining', 'x-ratelimit-reset', 'x-ratelimit-reset-after']
 const discordUrl = process.env.DISCORD_PROXY || 'https://discord.com'
 let defaultHeaders
 if(!process.env.DISCORD_PROXY && process.env.BOT_TOKEN) defaultHeaders = { "Authorization": "Bot "+process.env.BOT_TOKEN }
+console.log('Using '+discordUrl+' for discordAPI calls...')
 const parseResponse = async(res)=>{
   try{
     if(res){
@@ -46,12 +46,12 @@ const Send = async(uri, method, body, headers)=>{
       timeout: 60000,
       compress: true
     })
-    return await parseResoponse(res)
+    return await parseResponse(res)
   }catch(e){
     if(e?.name){
       return {error: e.name, message: e.message, type: e.type}
     }else{
-      if(e?.status) return await parseResoponse(e)
+      if(e?.status) return await parseResponse(e)
     }
   }
 }
