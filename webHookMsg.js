@@ -1,7 +1,6 @@
 'use strict'
 const FormData = require('form-data');
-const Send = require('./nodeFetch')
-const ReportError = require('/reportError')
+const apiRequest = require('./apiRequest')
 const baseUrl = 'api/webhooks/'+process.env.DISCORD_CLIENT_ID
 const SendMsg = async(token, msg2send, method = 'POST')=>{
   try{
@@ -10,10 +9,10 @@ const SendMsg = async(token, msg2send, method = 'POST')=>{
     if(typeof msg2send != 'object' && typeof msg2send == 'string') msg2send = {content: msg2send}
     if(!msg2send.content) msg2send.content = null
     if(!msg2send.components) msg2send.components = []
-    const res = await Send(url, method, JSON.stringify(msg2send), {"Content-Type": "application/json"})
+    const res = await apiRequest(url, method, JSON.stringify(msg2send), {"Content-Type": "application/json"})
     if((res?.status !== 200 && res?.status) || res.error){
       if(res?.status > 300 && (res?.body?.embeds || res?.body?.content)){
-        await Send(url, method, JSON.stringify({content: 'Your command was successful. however there was an error displaying the results. It may be that there is too much data to display'}), {"Content-Type": "application/json"})
+        await apiRequest(url, method, JSON.stringify({content: 'Your command was successful. however there was an error displaying the results. It may be that there is too much data to display'}), {"Content-Type": "application/json"})
       }
       return;
     }
@@ -43,7 +42,7 @@ const SendFile = async(token, msg2send, method = 'POST')=>{
     }
     if(count === 0) return;
     form.append('payload_json', JSON.stringify(tempObj))
-    const res = await Send(url, method, form, {})
+    const res = await apiRequest(url, method, form, {})
     return res?.body
   }catch(e){
     console.error(e);

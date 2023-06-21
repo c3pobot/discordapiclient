@@ -1,7 +1,7 @@
 'use strict'
 const fetch = require('node-fetch')
 const path = require('path')
-const ReportError = require('/reportError')
+const ReportError = require('./reportError')
 const headers2get = ['x-ratelimit-bucket', 'x-ratelimit-limit', 'x-ratelimit-remaining', 'x-ratelimit-reset', 'x-ratelimit-reset-after']
 const discordUrl = process.env.DISCORD_PROXY || 'https://discord.com'
 let defaultHeaders
