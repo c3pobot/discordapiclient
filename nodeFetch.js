@@ -4,6 +4,8 @@ const path = require('path')
 const ReportError = require('/reportError')
 const headers2get = ['x-ratelimit-bucket', 'x-ratelimit-limit', 'x-ratelimit-remaining', 'x-ratelimit-reset', 'x-ratelimit-reset-after']
 const discordUrl = process.env.DISCORD_PROXY || 'https://discord.com'
+let defaultHeaders
+if(!process.env.DISCORD_PROXY && process.env.BOT_TOKEN) defaultHeaders = { "Authorization": "Bot "+process.env.BOT_TOKEN }
 const parseResponse = async(res)=>{
   try{
     if(res){
@@ -36,7 +38,8 @@ const parseResponse = async(res)=>{
 }
 const Send = async(uri, method, body, headers)=>{
   try{
-    const res =  await fetch(path.joind(discordUrl, uri), {
+    if(defaultHeaders) headers = { ...headers,...defaultHeaders }
+    const res =  await fetch(path.join(discordUrl, uri), {
       headers: headers,
       method: method,
       body: body,
