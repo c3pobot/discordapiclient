@@ -2,7 +2,8 @@
 const fetch = require('node-fetch')
 const path = require('path')
 const headers2get = ['x-ratelimit-bucket', 'x-ratelimit-limit', 'x-ratelimit-remaining', 'x-ratelimit-reset', 'x-ratelimit-reset-after']
-const discordUrl = process.env.DISCORD_PROXY || 'https://discord.com'
+let discordUrl = process.env.DISCORD_PROXY || 'https://discord.com'
+discordUrl += '/api'
 let defaultHeaders
 if(!process.env.DISCORD_PROXY && process.env.BOT_TOKEN) defaultHeaders = { "Authorization": "Bot "+process.env.BOT_TOKEN }
 console.log('Using '+discordUrl+' for discordAPI calls...')
