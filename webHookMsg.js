@@ -33,14 +33,14 @@ const SendFile = async(token, msg2send, method = 'POST')=>{
       for(let i in msg2send.files){
         if(msg2send.files[i].file && msg2send.files[i].fileName){
           form.append('file'+(+i + 1), msg2send.files[i].file, msg2send.files[i].fileName)
-          count++
+          fileCount++
         }
       }
     }else{
       form.append('file', msg2send.file, msg2send.fileName)
-      count++
+      fileCount++
     }
-    if(count === 0) return;
+    if(fileCount === 0) return;
     form.append('payload_json', JSON.stringify(tempObj))
     const res = await apiRequest(url, method, form, {})
     return res?.body
