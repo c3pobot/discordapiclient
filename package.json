@@ -1,5 +1,5 @@
 {
-  "name": "discordapiwrapper",
+  "name": "discordapiclient",
   "version": "1.0.0",
   "description": "wrapper for accessing discord api",
   "main": "index.js",
