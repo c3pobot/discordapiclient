@@ -18,7 +18,7 @@ const SendMsg = async(token, msg2send, method = 'POST')=>{
     }
     return res?.body
   }catch(e){
-    console.error(e);
+    throw(e);
   }
 }
 const SendFile = async(token, msg2send, method = 'POST')=>{
@@ -45,7 +45,7 @@ const SendFile = async(token, msg2send, method = 'POST')=>{
     const res = await apiRequest(url, method, form, {})
     return res?.body
   }catch(e){
-    console.error(e);
+    throw(e);
   }
 }
 module.exports = async(token, msg2send, method = 'POST')=>{
@@ -57,6 +57,6 @@ module.exports = async(token, msg2send, method = 'POST')=>{
       return await SendMsg(token, msg2send, method)
     }
   }catch(e){
-    console.error(e);
+    throw(e);
   }
 }

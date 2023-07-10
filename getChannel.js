@@ -8,6 +8,6 @@ module.exports = async(chId)=>{
     ReportError(obj, 'GetChannel', {chId: chId})
     return obj?.body
   }catch(e){
-    console.error(e)
+    throw(e)
   }
 }

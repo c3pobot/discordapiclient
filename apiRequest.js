@@ -34,7 +34,7 @@ const parseResponse = async(res)=>{
       }
     }
   }catch(e){
-    console.error(e);
+    throw(e);
   }
 }
 const Send = async(uri, method, body, headers)=>{

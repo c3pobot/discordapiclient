@@ -16,7 +16,7 @@ const SendMsg = async(chId, msg2send)=>{
     }
     return res?.body
   }catch(e){
-    console.error(e);
+    throw(e);
   }
 }
 const SendFile = async(chId, msg2send)=>{
@@ -43,7 +43,7 @@ const SendFile = async(chId, msg2send)=>{
     const res = await apiRequest(url, 'POST', form, {})
     return res?.body
   }catch(e){
-    console.error(e);
+    throw(e);
   }
 }
 module.exports = async(chId, msg2send)=>{
@@ -55,6 +55,6 @@ module.exports = async(chId, msg2send)=>{
       return await SendMsg(chId, msg2send)
     }
   }catch(e){
-    console.error(e);
+    throw(e);
   }
 }

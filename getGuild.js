@@ -8,6 +8,6 @@ module.exports = async(sId)=>{
     ReportError(res, 'GetGuild', {sId: sId})
     return res?.body
   }catch(e){
-    console.error(e)
+    throw(e)
   }
 }

@@ -1,4 +1,5 @@
 'use strict'
+const log = require('./logger')
 module.exports = (obj = {}, type, opts = {})=>{
   try{
     if(obj.status > 300 || obj.error){
@@ -13,9 +14,9 @@ module.exports = (obj = {}, type, opts = {})=>{
       }else{
         errMsg += JSON.stringify(obj)+'\n'
       }
-      console.error(errMsg)
+      log.error(errMsg)
     }
   }catch(e){
-    console.error(e)
+    log.error(e)
   }
 }
