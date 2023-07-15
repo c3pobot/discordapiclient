@@ -38,16 +38,12 @@ const parseResponse = async(res)=>{
     throw(e);
   }
 }
-const Send = async(uri, method, body, headers)=>{
+const Send = async(uri, method, body, headers = {})=>{
   try{
     if(defaultHeaders) headers = { ...headers,...defaultHeaders }
-    const res =  await fetch(path.join(discordUrl, uri), {
-      headers: headers,
-      method: method,
-      body: body,
-      timeout: 60000,
-      compress: true
-    })
+    let payload = { method: method, timeout: 60000, headers: headers }
+    if(body) payload.body = body
+    const res =  await fetch(path.join(discordUrl, uri), payload)
     return await parseResponse(res)
   }catch(e){
     if(e?.name){
